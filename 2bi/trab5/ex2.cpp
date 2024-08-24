@@ -13,7 +13,7 @@ class Livro
 public:
     std::string titulo;
     std::string autor;
-    int anoPublicacao;
+    int anoPublicacao = 0;
     
 public:
     
