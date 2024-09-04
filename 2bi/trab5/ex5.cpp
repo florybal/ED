@@ -13,8 +13,6 @@ Circulo. Percorra o array e chame o método area() para cada objeto, exibindo o 
 class Forma {
 public:
     virtual double area() const = 0;
-
-    virtual ~Forma() {}
 };
 
 class Retangulo : public Forma {
