@@ -22,7 +22,7 @@ para conferir o formato esperado.
 #include <deque>
 #include <vector>
 
-int main() {
+int main() {    
     int n;
     while (std::cin >> n && n != 0) {
         std::deque<int> deck;
