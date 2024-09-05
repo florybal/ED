@@ -98,11 +98,11 @@ class ListaEncadeada
                 inicio = nullptr;
             }
 
-            while(aux->prox !=nullptr)
+            while(aux->prox->prox !=nullptr)
             {
                 aux = aux->prox;
             }
-            delete aux;
+            delete aux->prox;
             aux ->prox = nullptr;
         }
 };
