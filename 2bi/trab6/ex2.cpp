@@ -14,13 +14,15 @@ class Nodo {
         // Construtor
         Nodo(int info) {
             this->info = info;
-            this->prox = NULL;
+            this->prox = nullptr;
         }
 };
 
-class ListaEncadeada {
+class ListaEncadeada 
+{
     private:
         Nodo* inicio;  // Ponteiro para o primeiro nó da lista
+        Nodo*    fim;  // Ponteiro para o fim da lista 
 
     public:
         // Construtor
@@ -32,7 +34,7 @@ class ListaEncadeada {
 
         ~ListaEncadeada() { // Importante! Desalocar toda a memória alocada
             std::cout << "Desalocando Lista ..." << std::endl;
-            while (this->inicio!=NULL)
+            while (this->inicio!=nullptr)
                 remove_inicio();
             std::cout << "Lista desalocada"<< std::endl; 
             imprime();
@@ -42,7 +44,7 @@ class ListaEncadeada {
         void remove_inicio(){
             Nodo *aux;
             std::cout << "Remove do início" << std::endl;
-            if (this->inicio != NULL){ 
+            if (this->inicio != nullptr){ 
                 aux = this->inicio; 
                 // o início passa a apontar para o segundo elemento da lista
                 this->inicio = aux->prox; 
@@ -64,23 +66,68 @@ class ListaEncadeada {
             std::cout << "Lista:"<<std::endl<<"   ";
             Nodo* pos = this->inicio;
             std::cout << "Início -> ";
-            while (pos != NULL) {
+            while (pos != nullptr) {
                 std::cout << pos->info << " -> ";
                 pos = pos->prox;
             }
             std::cout << "#" << std::endl<<std::endl;  // símbolo, para indicar que a lista terminou
         }
-        void insereFim(int info)
+        // Inserir no final
+        void insereFim(int info) 
         {  
             Nodo* novo = new Nodo(info);
-            for(Nodo *i= this->inicio; i< novo; i++)
-                if(novo->prox == NULL)  
-                    novo = novo->prox; 
+            if(inicio == nullptr)
+                inicio = novo;
+            else{
+                Nodo* temp = inicio;
+                do{
+                    temp = temp->prox;
+                }while(temp->prox != nullptr);
+                
+                temp->prox = novo;
+            }
+            
+        }
+        void remove_fim()
+        {
+            Nodo* aux = inicio;
+            std::cout<<"Remove fim "<<std::endl;
+            if(inicio->prox == nullptr) //lista de um elemento
+            {
+                delete inicio;
+                inicio = nullptr;
+            }
+
+            while(aux->prox !=nullptr)
+            {
+                aux = aux->prox;
+            }
+            delete aux;
+            aux ->prox = nullptr;
         }
 };
 
 int main()
 {
+    ListaEncadeada lista;
+
+    for(int i=0; i<3; i++)
+    {
+        lista.insere_inicio(i);
+        lista.imprime();
+    }
+
+    lista.insereFim(23);
+    lista.imprime();
+
+    lista.remove_fim();
+    lista.imprime();
+
+    for(int i=0; i<3; i++)
+    {
+        lista.remove_inicio();
+        lista.imprime();
+    }
 
     return 0;
 }
